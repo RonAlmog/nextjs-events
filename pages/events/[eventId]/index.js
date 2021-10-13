@@ -1,4 +1,4 @@
-import { getEventById, getAllEvents } from "../../../helpers/api-util";
+import { getEventById, getFeaturedEvents } from "../../../helpers/api-util";
 import { Fragment } from "react";
 import EventSummary from "../../../components/events/event-detail/event-summary";
 import EventLogistics from "../../../components/events/event-detail/event-logistics";
@@ -8,9 +8,9 @@ const Index = (props) => {
   const event = props.event;
   if (!event) {
     return (
-      <ErrorAlert>
-        <p>No event found...</p>
-      </ErrorAlert>
+      <div className="center">
+        <p>Loading...</p>
+      </div>
     );
   }
   return (
@@ -34,14 +34,15 @@ export default Index;
 export async function getStaticProps(context) {
   const eventId = context.params.eventId;
   const event = await getEventById(eventId);
-  return { props: { event } };
+  return { props: { event }, revalidate: 300 };
 }
 
 export async function getStaticPaths() {
-  const allevents = await getAllEvents();
+  const allevents = await getFeaturedEvents();
   const paths = allevents.map((event) => ({ params: { eventId: event.id } }));
   return {
     paths: paths,
-    fallback: false,
+    // fallback: false, we pre generte everything. whatever is not here is 404.
+    fallback: true, // true: there are more pages than what we pre generate. they will be generated in real time.
   };
 }
