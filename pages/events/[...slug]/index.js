@@ -35,6 +35,12 @@ function FilteredEventsPage(props) {
     }
   }, [data]);
 
+  const filteredYear = filterData[0];
+  const filteredMonth = filterData[1];
+
+  const numYear = +filteredYear;
+  const numMonth = +filteredMonth;
+
   let pageHeadData = (
     <Head>
       <title>Filtered Events</title>
@@ -50,12 +56,6 @@ function FilteredEventsPage(props) {
       </Fragment>
     );
   }
-
-  const filteredYear = filterData[0];
-  const filteredMonth = filterData[1];
-
-  const numYear = +filteredYear;
-  const numMonth = +filteredMonth;
 
   pageHeadData = (
     <Head>

@@ -4,6 +4,7 @@ import EventSummary from "../../../components/events/event-detail/event-summary"
 import EventLogistics from "../../../components/events/event-detail/event-logistics";
 import EventContent from "../../../components/events/event-detail/event-content";
 import ErrorAlert from "../../../ui/error-alert";
+import Head from "next/head";
 const Index = (props) => {
   const event = props.event;
   if (!event) {
@@ -15,6 +16,10 @@ const Index = (props) => {
   }
   return (
     <Fragment>
+      <Head>
+        <title>{event.title}</title>
+        <meta name="description" description="{event.description}" />
+      </Head>
       <EventSummary title={event.title}></EventSummary>
       <EventLogistics
         date={event.date}
