@@ -4,6 +4,7 @@ import DateIcon from "../icons/date-icon";
 import AddressIcon from "../icons/address-icon";
 import ArrorRightIcon from "../icons/arrow-right-icon";
 import ArrowRightIcon from "../icons/arrow-right-icon";
+import Image from "next/image";
 const EventItem = (props) => {
   const { title, image, date, location, id } = props;
   const niceDate = new Date(date).toLocaleDateString("en-US");
@@ -11,7 +12,7 @@ const EventItem = (props) => {
   const exploreLink = `/events/${id}`;
   return (
     <li className={styles.item}>
-      <img src={"/" + image} alt={title} width="400"></img>
+      <Image src={"/" + image} alt={title} width={250} height={160} />
 
       <div className={styles.content}>
         <div className={styles.summary}>
